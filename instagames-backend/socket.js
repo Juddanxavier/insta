@@ -40,19 +40,21 @@ const getStatus = () => {
   let gameId2 = db.get("gameId2");
   return { gameStatus, gameId, gameId2 };
 };
+
 const whitelist = [
   "https://instagamesm.com/",
   "https://admin.instagamesm.com/",
   "http://localhost:3000/",
   "http://localhost:3001/",
 ];
+
 const server = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
       origin: whitelist,
     },
-    // transports: ['websocket', 'polling'],
   });
+
   io.on("connection", (socket) => {
     let gameStatus = db.get("gameStatus");
     let gameId = db.get("gameId");
@@ -115,9 +117,7 @@ const server = (httpServer) => {
         let gameStatus = db.get("gameStatus");
 
         io.sockets.emit("gameOff", { gameStatus });
-      }, 60000);
-
-      // }, (gameSetting?.gameOffTime || db.get("timelimitInMinutes")) * 60000);
+      }, (gameSetting?.gameOffTime || db.get("timelimitInMinutes")) * 60000);
     });
 
     socket.on("result", async (number, amount, winningRatio) => {
@@ -127,7 +127,7 @@ const server = (httpServer) => {
         const gameSetting = await GameSetting.findOne({});
 
         if (!winningRatio) {
-          winningRatio = null.null;
+          winningRatio = gameSetting?.winningRatio;
         }
 
         const winningAmount = Number(amount);
