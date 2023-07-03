@@ -115,9 +115,9 @@ const server = (httpServer) => {
         let gameStatus = db.get("gameStatus");
 
         io.sockets.emit("gameOff", { gameStatus });
-        // }, 60000);
+      }, 60000);
 
-      }, (gameSetting?.gameOffTime || db.get("timelimitInMinutes")) * 60000);
+      // }, (gameSetting?.gameOffTime || db.get("timelimitInMinutes")) * 60000);
     });
 
     socket.on("result", async (number, amount, winningRatio) => {
