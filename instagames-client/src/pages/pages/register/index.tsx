@@ -250,7 +250,6 @@ const RegisterPage = () => {
     const randomIndex = Math.floor(Math.random() * names.length);
     return names[randomIndex]
   }
-
   const [randomName, setRandomName] = useState(randomNameIndex());
 
 
