@@ -49,7 +49,7 @@ module.exports = {
         ? envVars.MONGODB_URL
         : envVars.MONGODB_LOCAL) + (envVars.NODE_ENV === "test" ? "-test" : ""),
     options: {
-      useCreateIndex: true,
+      // useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
